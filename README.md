@@ -16,7 +16,7 @@ protected a hypothetical wealth-management client portfolio through it.
 
 ## Selected results
 
-![Hedge comparison](docs/hedge_comparison_screenshot.png)
+![Hedge comparison](hedge_comparison_screenshot.png)
 
 | | |
 |---|---|
