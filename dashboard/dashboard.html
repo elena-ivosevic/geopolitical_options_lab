@@ -9,20 +9,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
   :root {
-    --bg: #0A0B0D;
-    --panel: #14171C;
-    --panel-2: #1B1F26;
-    --border: #262B33;
-    --border-soft: #1E222A;
-    --text: #EDEDED;
-    --muted: #8B92A0;
-    --muted-2: #5F6672;
-    --amber: #C2760C;
-    --amber-dim: #7A4E10;
-    --teal: #14A0AC;
-    --teal-dim: #0E5359;
-    --red: #DC5A4A;
-    --green: #4FAE73;
+    --bg: #000000;
+    --panel: #2F2F2F;
+    --panel-2: #3A3A3A;
+    --border: #4A4A4A;
+    --border-soft: #383838;
+    --text: #E3E6E9;
+    --muted: #939191;
+    --muted-2: #6E6C6C;
+    --amber: #FF5A22;
+    --amber-dim: #8A3313;
+    --teal: #3BCFCD;
+    --teal-dim: #1F6F6D;
+    --red: #FF5A22;
+    --green: #3BCFCD;
     --mono: 'IBM Plex Mono', monospace;
     --display: 'Space Grotesk', sans-serif;
     --body: 'Inter', sans-serif;
@@ -344,17 +344,17 @@ const fmtDateShort = (isoDate) => {
 };
 
 /* ---------------- Chart.js dark theme defaults ---------------- */
-Chart.defaults.color = '#8B92A0';
+Chart.defaults.color = '#939191';
 Chart.defaults.font.family = "'IBM Plex Mono', monospace";
 Chart.defaults.font.size = 10.5;
-Chart.defaults.borderColor = '#1E222A';
+Chart.defaults.borderColor = '#383838';
 const COLORS = {
-  amber: '#C2760C', amberDim: 'rgba(194,118,12,0.16)',
-  teal: '#14A0AC', tealDim: 'rgba(20,160,172,0.16)',
-  red: '#DC5A4A', redDim: 'rgba(220,90,74,0.16)',
-  green: '#4FAE73', greenDim: 'rgba(79,174,115,0.16)',
-  muted: '#8B92A0', text: '#EDEDED',
-  palette: ['#C2760C','#14A0AC','#DC5A4A','#4FAE73','#8B7FD6','#D6C25F','#6BAED6']
+  amber: '#FF5A22', amberDim: 'rgba(255,90,34,0.16)',
+  teal: '#3BCFCD', tealDim: 'rgba(59,207,205,0.16)',
+  red: '#FF5A22', redDim: 'rgba(255,90,34,0.16)',
+  green: '#3BCFCD', greenDim: 'rgba(59,207,205,0.16)',
+  muted: '#939191', text: '#E3E6E9',
+  palette: ['#FF5A22','#1253FF','#3BCFCD','#00008C','#939191','#E3E6E9','#FF8F5E']
 };
 
 /* ================= TAB SCAFFOLDING ================= */
@@ -388,20 +388,20 @@ function chartOpts(opts) {
   opts = opts || {};
   const scales = {
     x: {
-      grid: { color: '#1B1F26' },
+      grid: { color: '#383838' },
       ticks: { maxRotation: 0, autoSkip: true, maxTicksLimit: 9 },
-      title: { display: !!opts.xLabel, text: opts.xLabel || '', color: '#8B92A0', font: { size: 11, family: "'IBM Plex Mono', monospace" } },
+      title: { display: !!opts.xLabel, text: opts.xLabel || '', color: '#939191', font: { size: 11, family: "'IBM Plex Mono', monospace" } },
     },
     y: {
-      grid: { color: '#1B1F26' },
-      title: { display: !!opts.yLabel, text: opts.yLabel || '', color: '#8B92A0', font: { size: 11, family: "'IBM Plex Mono', monospace" } },
+      grid: { color: '#383838' },
+      title: { display: !!opts.yLabel, text: opts.yLabel || '', color: '#939191', font: { size: 11, family: "'IBM Plex Mono', monospace" } },
     },
   };
   if (opts.y1Label) {
     scales.y1 = {
       position: 'right',
       grid: { drawOnChartArea: false },
-      title: { display: true, text: opts.y1Label, color: '#8B92A0', font: { size: 11, family: "'IBM Plex Mono', monospace" } },
+      title: { display: true, text: opts.y1Label, color: '#939191', font: { size: 11, family: "'IBM Plex Mono', monospace" } },
     };
   }
   return {
@@ -413,7 +413,7 @@ function chartOpts(opts) {
       title: {
         display: !!opts.title,
         text: opts.title || '',
-        color: '#EDEDED',
+        color: '#E3E6E9',
         font: { size: 12.5, family: "'Space Grotesk', sans-serif", weight: '600' },
         padding: { bottom: 16 },
         align: 'start',
@@ -425,8 +425,8 @@ function chartOpts(opts) {
         labels: { boxWidth: 10, boxHeight: 10, font: { size: 10.5 }, padding: 14 },
       },
       tooltip: {
-        backgroundColor: '#1B1F26', borderColor: '#262B33', borderWidth: 1,
-        titleColor: '#EDEDED', bodyColor: '#EDEDED', padding: 10, boxPadding: 4,
+        backgroundColor: '#3A3A3A', borderColor: '#4A4A4A', borderWidth: 1,
+        titleColor: '#E3E6E9', bodyColor: '#E3E6E9', padding: 10, boxPadding: 4,
       },
     },
     scales,
@@ -758,18 +758,25 @@ function buildHedging() {
   const el = document.getElementById('page-hedging');
   el.innerHTML = `
     <div class="panel">
-      <h2>$1M hypothetical client portfolio &mdash; hedge comparison</h2>
+      <h2>Hypothetical client portfolio &mdash; hedge comparison</h2>
       <div class="desc">
         SPY 65% &middot; XLY 10% &middot; JETS 5% &middot; XLV 10% &middot; cash/bonds 10%. Scenarios are calibrated
         from real Phase 5 event returns (Major Disruption = E1's actual moves, De-escalation = E3's actual moves);
         Mild Escalation is an interpolation (35% of Major Disruption's magnitude) &mdash; no event in this project's
         sample was actually mild, so that scenario is a modeling assumption, not a measurement.
       </div>
-      <div class="field" style="max-width:260px;">
-        <label>Portfolio value ($)</label>
-        <input type="number" id="portValue" value="1000000" step="10000">
+      <div style="display:flex; gap:24px; flex-wrap:wrap; align-items:flex-end; margin-bottom:8px;">
+        <div class="field" style="max-width:260px; margin-bottom:0;">
+          <label>Portfolio value ($)</label>
+          <input type="number" id="portValue" value="1000000" step="10000">
+        </div>
+        <div class="tabs-inline" id="chartModeToggle" style="margin-bottom:0;">
+          <button data-mode="pct" class="active">Show as %</button>
+          <button data-mode="usd">Show as $</button>
+        </div>
       </div>
       <div class="chart-wrap tall"><canvas id="hedgeChart"></canvas></div>
+      <div class="note">Percentage returns are the same at any portfolio size, since every hedge is sized as a fixed share of the portfolio &mdash; that's expected, not a bug. Switch to "Show as $" to see the chart move with the portfolio value above.</div>
     </div>
     <div class="grid grid-2">
       <div class="panel">
@@ -786,8 +793,20 @@ function buildHedging() {
   `;
 
   let hedgeChart = null;
+  let chartMode = 'pct';
+
+  const toggleEl = document.getElementById('chartModeToggle');
+  toggleEl.querySelectorAll('button').forEach(btn => {
+    btn.onclick = () => {
+      chartMode = btn.dataset.mode;
+      toggleEl.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+      render();
+    };
+  });
+
   function render() {
-    const scale = (parseFloat(document.getElementById('portValue').value) || 1000000) / 1000000;
+    const portfolioValue = parseFloat(document.getElementById('portValue').value) || 1000000;
+    const scale = portfolioValue / 1000000;
     const scenarios = ['A_mild_escalation','B_major_disruption','C_deescalation'];
     const scenarioLabels = {A_mild_escalation: 'Mild Escalation*', B_major_disruption: 'Major Disruption', C_deescalation: 'De-escalation'};
     const strategies = ['No hedge','Protective put','Collar','Oil call overlay'];
@@ -796,7 +815,8 @@ function buildHedging() {
       label: strat,
       data: scenarios.map(sc => {
         const row = DATA.scenarioResults.find(r => r.scenario === sc && r.strategy === strat);
-        return row ? row.return_pct : 0;
+        if (!row) return 0;
+        return chartMode === 'usd' ? row.return_pct / 100 * portfolioValue : row.return_pct;
       }),
       backgroundColor: COLORS.palette[i % COLORS.palette.length],
     }));
@@ -806,8 +826,12 @@ function buildHedging() {
       type: 'bar',
       data: { labels: scenarios.map(s => scenarioLabels[s]), datasets },
       options: chartOpts({
-        title: 'Portfolio return by strategy and scenario',
-        xLabel: 'Scenario', yLabel: 'Portfolio return (%)', legend: true,
+        title: chartMode === 'usd'
+          ? `Portfolio P&L by strategy and scenario (on ${fmtUSD(portfolioValue)})`
+          : 'Portfolio return by strategy and scenario (% \u2014 same at any portfolio size)',
+        xLabel: 'Scenario',
+        yLabel: chartMode === 'usd' ? 'Portfolio P&L ($)' : 'Portfolio return (%)',
+        legend: true,
       })
     });
 
