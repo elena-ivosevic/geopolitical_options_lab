@@ -1,19 +1,13 @@
 # Impacts of Geopolitical Tensions on Cross-Asset Allocations
 ### An Option-Implied Geopolitical Risk Dashboard
 
-[![tests](https://github.com/elena-ivosevic/geopolitical_options_lab/actions/workflows/tests.yml/badge.svg)](https://github.com/elena-ivosevic/geopolitical_options_lab/actions/workflows/tests.yml)
 
 A Black-Scholes-based research project measuring how the 2026 Iran&ndash;Israel&ndash;U.S.
 conflict and Strait of Hormuz disruptions moved oil, airline, consumer, healthcare, and
 broad-market risk &mdash; and testing whether standard option hedges would have actually
 protected a hypothetical wealth-management client portfolio through it.
 
-**[Open the interactive dashboard &rarr;](https://elena-ivosevic.github.io/geopolitical_options_lab/)**
-(once GitHub Pages is enabled &mdash; see *Running the project* below). Or download
-`dashboard/index.html` and open it directly in any browser; no server or build step required.
-## Interactive Dashboard
-
-[Launch the live dashboard](https://elena-ivosevic.github.io/geopolitical_options_lab/)
+**[Launch the live dashboard](https://elena-ivosevic.github.io/geopolitical_options_lab/)**
 ---
 
 ## Selected results
@@ -150,26 +144,10 @@ python scripts/fetch_event_data.py
 ```
 
 (Requires `yfinance` and `pandas`; see the script's docstring for details.)
+[![tests](https://github.com/elena-ivosevic/geopolitical_options_lab/actions/workflows/tests.yml/badge.svg)](https://github.com/elena-ivosevic/geopolitical_options_lab/actions/workflows/tests.yml)
 
-### Enabling the live dashboard link
 
-Settings &rarr; Pages &rarr; Source: "Deploy from a branch" &rarr; Branch: `main`, folder:
-`/dashboard` &rarr; Save. GitHub will publish a URL like
-`https://elena-ivosevic.github.io/geopolitical_options_lab/` within a couple of minutes.
 
-### Repository "About" section (GitHub setup)
-
-Suggested description:
-
-> Python options research platform studying geopolitical shocks, volatility transmission, and
-> portfolio hedging.
-
-Suggested topics:
-
-```
-quantitative-finance  options-pricing  black-scholes  geopolitical-risk
-portfolio-hedging  event-study  python
-```
 
 ## The dashboard
 
@@ -182,17 +160,6 @@ views:
 4. **Hedge Simulator** &mdash; the $1M portfolio comparison, rescalable to any portfolio size
 5. **Model Risk** &mdash; the delta-hedging-through-a-jump and constant-volatility-failure results
 
-## Résumé bullets
-
-> Developed a Python options-research platform analyzing geopolitical volatility transmission
-> across seven equity, energy, airline, consumer, healthcare, and commodity ETFs using
-> Black-Scholes, Greeks, an implied-volatility solver, and event-study methodology on real
-> market data.
-
-> Compared protective puts, collars, and cross-asset overlays for a hypothetical $1 million
-> portfolio using a historically calibrated hedge simulation, finding an oil-linked hedge
-> achieved 7.26x protection efficiency during the studied supply shock &mdash; while a
-> broad-market protective put underperformed a no-hedge baseline.
 
 ## Limitations
 
