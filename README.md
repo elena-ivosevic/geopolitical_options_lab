@@ -7,7 +7,7 @@ conflict and Strait of Hormuz disruptions moved oil, airline, consumer, healthca
 broad-market risk &mdash; and testing whether standard option hedges would have actually
 protected a hypothetical wealth-management client portfolio through it.
 
-**[Launch the live dashboard](https://elena-ivosevic.github.io/investment_hedging_model_esi/)**
+**[Launch the live dashboard](https://elena-ivosevic.github.io/geopolitical-options-lab/)**
 ---
 
 ## Selected results
