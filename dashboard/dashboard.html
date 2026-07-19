@@ -197,7 +197,7 @@
   tr:hover td { background: rgba(255,255,255,0.015); }
   td.label-cell { font-family: var(--body); text-align: left; }
 
-  .timeline { position: relative; height: 96px; margin: 10px 0 6px; }
+  .timeline { position: relative; height: 148px; margin: 10px 0 6px; }
   .timeline .track { position: absolute; left: 0; right: 0; top: 46px; height: 2px; background: var(--border); }
   .tl-event {
     position: absolute; top: 26px; width: 13px; height: 13px; border-radius: 50%;
@@ -205,7 +205,7 @@
   }
   .tl-label {
     position: absolute; top: 50px; transform: translateX(-50%);
-    font-family: var(--mono); font-size: 10.5px; color: var(--muted); text-align: center; width: 150px; line-height: 1.5;
+    font-family: var(--mono); font-size: 10.5px; color: var(--muted); text-align: center; width: 175px; line-height: 1.5;
   }
   .tl-label b { color: var(--text); display: block; font-size: 11px; margin-bottom: 3px; }
 
@@ -262,8 +262,8 @@
 <body>
 
 <header>
-  <div class="eyebrow">Option-Implied Geopolitical Risk &mdash; KWM Internship Project</div>
-  <h1>From Hormuz to the <span>Portfolio</span></h1>
+  <div class="eyebrow">Option-Implied Geopolitical Risk</div>
+  <h1>Investment Hedging Model <span>&mdash; Impacts of Geopolitical Tensions on Cross-Asset Allocations</span></h1>
   <div class="subtitle">
     Tracking how the Iran&ndash;Israel&ndash;U.S. conflict and Strait of Hormuz disruptions moved oil, airline,
     consumer, healthcare, and broad-market risk &mdash; and testing whether Black-Scholes-based hedges would
@@ -338,6 +338,10 @@ const fmtPct = (v, decimals) => {
   return sign + v.toFixed(d) + '%';
 };
 const fmtNum = (v, decimals) => v.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+const fmtDateShort = (isoDate) => {
+  const d = new Date(isoDate + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+};
 
 /* ---------------- Chart.js dark theme defaults ---------------- */
 Chart.defaults.color = '#8B92A0';
@@ -479,7 +483,7 @@ function buildOverview() {
 
   buildTimeline();
 
-  const labels = DATA.priceSeries.SPY.map(r => r.d);
+  const labels = DATA.priceSeries.SPY.map(r => fmtDateShort(r.d));
   const datasets = tickers.map((t, i) => {
     const series = DATA.priceSeries[t];
     const base = series[0].c;
@@ -498,14 +502,14 @@ function buildOverview() {
     data: { labels, datasets },
     options: chartOpts({
       title: 'Indexed price paths, all seven assets (Feb 9, 2026 = 100)',
-      xLabel: 'Date', yLabel: 'Index level (start = 100)', legend: true,
+      xLabel: 'Date (2026)', yLabel: 'Index level (start = 100)', legend: true,
     })
   });
 
   new Chart(document.getElementById('volChart'), {
     type: 'line',
     data: {
-      labels: DATA.priceSeries.VIX.map(r => r.d),
+      labels: DATA.priceSeries.VIX.map(r => fmtDateShort(r.d)),
       datasets: [
         { label: 'VIX (broad market)', data: DATA.priceSeries.VIX.map(r => r.c), borderColor: COLORS.teal, backgroundColor: 'transparent', pointRadius: 0, borderWidth: 2 },
         { label: 'OVX (oil)', data: DATA.priceSeries.OVX.map(r => r.c), borderColor: COLORS.amber, backgroundColor: 'transparent', pointRadius: 0, borderWidth: 2 },
@@ -513,7 +517,7 @@ function buildOverview() {
     },
     options: chartOpts({
       title: 'Volatility index levels through the study period',
-      xLabel: 'Date', yLabel: 'Index level', legend: true,
+      xLabel: 'Date (2026)', yLabel: 'Index level', legend: true,
     })
   });
 }
@@ -528,7 +532,16 @@ function buildTimeline() {
     const pct = ((t - min) / (max - min)) * 100;
     const color = e.Direction === 'Escalation' ? COLORS.red : COLORS.green;
     html += `<div class="tl-event" style="left:${pct}%; background:${color};" title="${e.Event}"></div>`;
-    html += `<div class="tl-label" style="left:${pct}%;"><b>${e.Event_ID} &middot; ${e.Market_T0}</b>${e.Event}</div>`;
+
+    let labelStyle = `left:${pct}%;`;
+    if (pct > 82) {
+      labelStyle += 'transform: translateX(-88%); text-align: right;';
+    } else if (pct < 12) {
+      labelStyle += 'transform: translateX(-12%); text-align: left;';
+    } else {
+      labelStyle += 'transform: translateX(-50%);';
+    }
+    html += `<div class="tl-label" style="${labelStyle}"><b>${e.Event_ID} &middot; ${e.Market_T0}</b>${e.Event}</div>`;
   });
   html += '</div>';
   wrap.innerHTML = html;
